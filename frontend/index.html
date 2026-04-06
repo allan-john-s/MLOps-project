@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Vehicle Parking System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="header__title">🚗 Online Vehicle Parking System</h1>
+            <nav class="header__nav">
+                <button class="btn btn--secondary" id="homeBtn">Home</button>
+                <button class="btn btn--primary" id="bookingBtn">Book Parking</button>
+                <button class="btn btn--outline" id="adminBtn">Admin Dashboard</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="homeSection" class="section active">
+        <div class="container">
+            <div class="hero">
+                <h2 class="hero__title">Welcome to Smart Parking Management</h2>
+                <p class="hero__description">
+                    Book your parking slot online with ease. Our system provides real-time availability, 
+                    instant booking confirmation, and hassle-free management of your parking needs.
+                </p>
+                
+                <div class="features">
+                    <div class="feature-card">
+                        <h3>Easy Booking</h3>
+                        <p>Select available slots and book instantly with our intuitive interface.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Real-time Updates</h3>
+                        <p>View live parking slot availability with color-coded status indicators.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Flexible Management</h3>
+                        <p>Cancel bookings easily and view your complete parking history.</p>
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <button class="btn btn--primary btn--lg" id="ctaBookingBtn">Start Booking Now</button>
+                    <button class="btn btn--secondary btn--lg" id="ctaAdminBtn">Admin Access</button>
+                </div>
+            </div>
+
+            <footer class="footer">
+                <div class="contact-info">
+                    <h4>Contact Information</h4>
+                    <p>📞 Phone: +91 9944058574</p>
+                    <p>📧 Email: support@parkingsystem.com</p>
+                    <p>📍 Address: Smart Parking Solutions, Tech Park, Bangalore</p>
+                </div>
+            </footer>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="bookingSection" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Book Your Parking Slot</h2>
+                <p>Select an available slot (green) and fill in your details</p>
+            </div>
+
+            <div class="booking-layout">
+                <!-- Parking Grid -->
+                <div class="parking-grid-container">
+                    <h3>Parking Slots</h3>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color available"></div>
+                            <span>Available</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color booked"></div>
+                            <span>Booked</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color selected"></div>
+                            <span>Selected</span>
+                        </div>
+                    </div>
+                    <div id="parkingGrid" class="parking-grid"></div>
+                </div>
+
+                <!-- Booking Form -->
+                <div class="booking-form-container">
+                    <h3>Booking Details</h3>
+                    <form id="bookingForm" class="booking-form">
+                        <div class="form-group">
+                            <label class="form-label" for="userName">Full Name</label>
+                            <input type="text" id="userName" class="form-control" required>
+                            <span class="error-message" id="nameError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="vehicleNumber">Vehicle Number</label>
+                            <input type="text" id="vehicleNumber" class="form-control" placeholder="e.g., ABC123" required>
+                            <span class="error-message" id="vehicleError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="selectedSlot">Selected Slot</label>
+                            <input type="text" id="selectedSlot" class="form-control" readonly>
+                            <span class="error-message" id="slotError"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="bookingTime">Booking Time</label>
+                            <input 
+                                type="datetime-local" 
+                                id="bookingTime" 
+                                class="form-control" 
+                                required>
+                            <span class="error-message" id="timeError"></span>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn--primary btn--full-width">Book Slot</button>
+                            <button type="button" class="btn btn--secondary btn--full-width" id="clearFormBtn">Clear Form</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- User Bookings Section -->
+            <div class="user-bookings">
+                <h3>My Bookings</h3>
+                <div id="userBookingsList" class="bookings-list"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Section -->
+    <section id="adminSection" class="section">
+        <div class="container">
+            <!-- Admin Login -->
+            <div id="adminLogin" class="admin-login">
+                <div class="login-form">
+                    <h2>Admin Login</h2>
+                    <form id="adminLoginForm">
+                        <div class="form-group">
+                            <label class="form-label" for="adminUsername">Username</label>
+                            <input type="text" id="adminUsername" class="form-control" value="admin">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="adminPassword">Password</label>
+                            <input type="password" id="adminPassword" class="form-control" value="password">
+                        </div>
+                        <button type="submit" class="btn btn--primary btn--full-width">Login</button>
+                        <span class="error-message" id="loginError"></span>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Admin Dashboard -->
+            <div id="adminDashboard" class="admin-dashboard hidden">
+                <div class="dashboard-header">
+                    <h2>Admin Dashboard</h2>
+                    <button class="btn btn--outline" id="adminLogoutBtn">Logout</button>
+                </div>
+
+                <!-- Statistics -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3 id="totalSlotsCount">36</h3>
+                        <p>Total Slots</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="availableSlotsCount">34</h3>
+                        <p>Available</p>
+    </div>
+                    <div class="stat-card">
+                        <h3 id="bookedSlotsCount">2</h3>
+                        <p>Booked</p>
+                    </div>
+                </div>
+
+                <div class="admin-section">
+                    <h3>ML Pipeline Implementation</h3>
+                    <p class="pipeline-intro">
+                        Runs the 20-step MLOps pipeline from your slides using current parking bookings to build
+                        and evaluate an occupancy forecasting model.
+                    </p>
+                    <div class="slot-management-actions">
+                        <button class="btn btn--primary" id="runPipelineBtn">Run 20-Step Pipeline</button>
+                    </div>
+                    <div id="pipelineResults" class="pipeline-results">
+                        <div class="empty-state"><p>Run the pipeline to see detailed step-by-step results.</p></div>
+                    </div>
+                </div>
+
+                <!-- All Bookings -->
+                <div class="admin-section">
+                    <h3>All Bookings</h3>
+                    <div id="allBookingsList" class="admin-bookings-table"></div>
+                </div>
+
+                <!-- Slot Management -->
+                <div class="admin-section">
+                    <h3>Slot Management</h3>
+                    <div class="slot-management-actions">
+                        <button class="btn btn--primary" id="addSlotBtn">Add New Slot</button>
+                        <button class="btn btn--secondary" id="refreshSlotsBtn">Refresh Slots</button>
+                    </div>
+                    <div id="adminParkingGrid" class="parking-grid admin-parking-grid"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal hidden">
+        <div class="modal__backdrop"></div>
+        <div class="modal__content">
+            <h3 id="modalTitle">Confirm Action</h3>
+            <p id="modalMessage">Are you sure you want to proceed?</p>
+            <div class="modal__actions">
+                <button class="btn btn--primary" id="confirmBtn">Confirm</button>
+                <button class="btn btn--outline" id="cancelBtn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal hidden">
+        <div class="modal__backdrop"></div>
+        <div class="modal__content">
+            <h3>Success!</h3>
+            <p id="successMessage">Operation completed successfully.</p>
+            <div class="modal__actions">
+                <button class="btn btn--primary" id="successOkBtn">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
