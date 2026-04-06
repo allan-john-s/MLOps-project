@@ -1,0 +1,22 @@
+project:
+  name: "ParkingSlotOccupancy"
+  problem_statement: >
+    Predict if a parking slot booking will remain 'active' (1) 
+    or become 'cancelled/expired' (0) based on time and duration features.
+  task_type: "classification"
+  target_column: "target"
+  metrics: ["accuracy", "f1", "precision", "recall"]
+
+data:
+  raw_data_path: "data/raw/bookings.csv"
+  processed_dir: "data/processed/"
+  test_size: 0.2
+  val_size: 0.2
+  random_state: 42
+
+features:
+  numerical: ["duration", "hour", "dayOfWeek", "slotNumber"]
+
+model:
+  save_dir: "models"
+  model_name: "random_forest"
